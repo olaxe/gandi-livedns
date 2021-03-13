@@ -1,3 +1,5 @@
+Fork from the excellent jbbodart/gandlive-dns to add multiarch support
+
 # gandi-livedns
 
 The purpose of this container is to update DNS zone records using Gandi's LiveDNS (http://doc.livedns.gandi.net/) with your WAN IP.

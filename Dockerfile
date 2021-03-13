@@ -1,5 +1,5 @@
-FROM alpine:3.10.1
-LABEL maintainer="jbbodart@yahoo.com"
+FROM alpine:latest
+LABEL maintainer="olaxe"
 
 ENV REFRESH_INTERVAL=600
 ENV SET_IPV4="yes"

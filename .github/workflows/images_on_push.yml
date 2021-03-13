@@ -24,4 +24,4 @@ jobs:
         run: |
           docker buildx build --push \
             --tag olaxe/gandi-livedns:latest \
-            --platform linux/amd64,linux/arm64/v8,linux/arm/v6 .
+            --platform linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6,linux/386 .

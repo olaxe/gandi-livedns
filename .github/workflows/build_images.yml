@@ -1,4 +1,4 @@
-name: "Build Images on Push"
+name: "Build Images"
 
 on:
   push:

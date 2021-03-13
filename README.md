@@ -2,9 +2,9 @@
 
 Fork from the excellent jbbodart/gandlive-dns to add multiarch support.
 
-The [CI/CD: "https://github.com/olaxe/gandi-livedns/blob/master/.github/workflows/build_images.yml"] workflow automatically test, build and push new images (amd64, arm64, arm32 and 386) to the Docker Hub container registry every night 
+The CI/CD <https://github.com/olaxe/gandi-livedns/blob/master/.github/workflows/build_images.yml> workflow automatically test, build and push new images (amd64, arm64, arm32 and 386) to the Docker Hub container registry every night 
 
-The purpose of this container is to update DNS zone records using [Gandi's LiveDNS: "http://doc.livedns.gandi.net/"] with your WAN IP.
+The purpose of this container is to update DNS zone records using Gandi's LiveDNS <http://doc.livedns.gandi.net/> with your WAN IP.
 
 This image is extremely lightweight  (Alpine Linux based) and has very few dependencies. The actual DNS update program is coded in shell script only.
 

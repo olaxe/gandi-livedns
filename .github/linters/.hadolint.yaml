@@ -3,4 +3,4 @@
 ## Hadolint config file ##
 ##########################
 ignored:
-  - DL3008
+  - DL3018

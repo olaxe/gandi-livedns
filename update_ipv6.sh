@@ -22,21 +22,21 @@ else
   WAN_IPV6="${FORCE_IPV6}"
 fi
 
-for RECORD in "${RECORD_LIST//;/ }" ; do
+for RECORD in $(echo "$RECORD_LIST" | sed -e 's/;/ /g') ; do
   if [ "${RECORD}" = "@" ] || [ "${RECORD}" = "*" ]; then
     SUBDOMAIN="${DOMAIN}"
   else
     SUBDOMAIN="${RECORD}.${DOMAIN}"
   fi
 
-  CURRENT_IPV6=$(dig AAAA ${SUBDOMAIN} +short ${DNS_SERVER_CHECKING:-})
+  CURRENT_IPV6=$(dig AAAA "${SUBDOMAIN}" +short "${DNS_SERVER_CHECKING:-}")
   if [ "${CURRENT_IPV6}" = "${WAN_IPV6}" ] ; then
     echo "$(date "+[%Y-%m-%d %H:%M:%S]") [INFO] Current DNS AAAA record for ${RECORD} matches WAN IP (${CURRENT_IPV6}). Nothing to do."
     continue
   fi
 
   DATA='{"rrset_ttl": '${TTL}', "rrset_values": ["'${WAN_IPV6}'"]}'
-  status=$(curl -s -w %{http_code} -o /dev/null -XPUT -d "${DATA}" \
+  status=$(curl -s -w '%{http_code}' -o /dev/null -XPUT -d "${DATA}" \
     -H"X-Api-Key: ${APIKEY}" \
     -H"Content-Type: application/json" \
     "${API}/domains/${DOMAIN}/records/${RECORD}/AAAA")

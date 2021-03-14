@@ -8,7 +8,7 @@ set -f
 API="https://dns.api.gandi.net/api/v5/"
 IP_SERVICE="http://me.gandi.net"
 
-if [ ! -z "${DNS_SERVER_CHECKING}" ]; then
+if [ -n "${DNS_SERVER_CHECKING}" ]; then
   DNS_SERVER_CHECKING=@$DNS_SERVER_CHECKING
 fi
 

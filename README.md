@@ -2,7 +2,7 @@
 
 Fork from the excellent jbbodart/gandlive-dns to add multiarch support.
 
-The CI/CD <https://github.com/olaxe/gandi-livedns/blob/master/.github/workflows/build_images.yml> workflow automatically test, build and push new images (amd64, arm64, arm32 and 386) to the Docker Hub container registry every night 
+The CI/CD <https://github.com/olaxe/gandi-livedns/blob/master/.github/workflows/build_images.yml> workflow automatically test, build and push new images (amd64, arm64, arm32 and 386) to the Docker Hub container registry every night.
 
 The purpose of this container is to update DNS zone records using Gandi's LiveDNS <http://doc.livedns.gandi.net/> with your WAN IP.
 
@@ -29,7 +29,7 @@ docker run -d \
 	-e "APIKEY=<YOUR_VERY_SECRET_API_KEY>" \
 	-e "RECORD_LIST=blog;www;@" \
 	-e "DOMAIN=your-gandi-hosted-domain.com" \
-	jbbodart/gandi-livedns
+	olaxe/gandi-livedns
 ```
 This will update **blog.your-gandi-hosted-domain.com**, **www.your-gandi-hosted-domain.com**, and **your-gandi-hosted-domain.com** with your internet-facing IP (IPv4) every 10 minutes
 
@@ -41,7 +41,7 @@ version: '3.7'
     services:
     ...
         dyndns:
-            image: jbbodart/gandi-livedns
+            image: olaxe/gandi-livedns
             restart: unless-stopped
             env_file:
                 - "dyndns.env"

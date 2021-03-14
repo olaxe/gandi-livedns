@@ -22,7 +22,7 @@ else
   WAN_IPV4="${FORCE_IPV4}"
 fi
 
-for RECORD in ${RECORD_LIST//;/ } ; do
+for RECORD in $(echo $RECORD_LIST | sed -e 's/;/ /g') ; do
   if [ "${RECORD}" = "@" ] || [ "${RECORD}" = "*" ]; then
     SUBDOMAIN="${DOMAIN}"
   else

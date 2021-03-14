@@ -1,6 +1,7 @@
 # gandi-livedns
+[![GitHub Super-Linter](https://github.com/olaxe/gandi-livedns/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-Fork from the excellent jbbodart/gandlive-dns to add multiarch support.
+Fork from the excellent jbbodart/gandlive-dns to add multiarch support and external DNS check.
 
 The CI/CD <https://github.com/olaxe/gandi-livedns/blob/master/.github/workflows/build_images.yml> workflow automatically test, build and push new images (amd64, arm64, arm32 and 386) to the Docker Hub container registry every night.
 
@@ -21,6 +22,7 @@ Optional variables :
 * SET_IPV6: Update AAAA record (default: no)
 * FORCE_IPV4: Force the IPv4 address to be used in DNS A records
 * FORCE_IPV6: Force the IPv6 address to be used in DNS AAAA records
+* DNS_SERVER_CHECKING: Use a specific DNS server for checking Gandi records
 
 ## Examples
 The easiest way to run gandi-livedns is simply to *docker run* it from a computer in your network, leaving it running in the background with all the default settings.

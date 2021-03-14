@@ -8,9 +8,13 @@ set -f
 API="https://dns.api.gandi.net/api/v5/"
 IP_SERVICE="http://me.gandi.net"
 
-if [[ -z "${FORCE_IPV6}" ]]; then
+if [ ! -z "${DNS_SERVER_CHECKING}" ]; then
+  DNS_SERVER_CHECKING=@$DNS_SERVER_CHECKING
+fi
+
+if [ -z "${FORCE_IPV6}" ]; then
   WAN_IPV6=$(curl -s6 ${IP_SERVICE})
-  if [[ -z "${WAN_IPV6}" ]]; then
+  if [ -z "${WAN_IPV6}" ]; then
     echo "$(date "+[%Y-%m-%d %H:%M:%S]") [ERROR] Something went wrong. Can not get your IPv6 from ${IP_SERVICE}"
     exit 1
   fi
@@ -18,14 +22,14 @@ else
   WAN_IPV6="${FORCE_IPV6}"
 fi
 
-for RECORD in ${RECORD_LIST//;/ } ; do
+for RECORD in "${RECORD_LIST//;/ }" ; do
   if [ "${RECORD}" = "@" ] || [ "${RECORD}" = "*" ]; then
     SUBDOMAIN="${DOMAIN}"
   else
     SUBDOMAIN="${RECORD}.${DOMAIN}"
   fi
 
-  CURRENT_IPV6=$(dig AAAA ${SUBDOMAIN} +short)
+  CURRENT_IPV6=$(dig AAAA ${SUBDOMAIN} +short ${DNS_SERVER_CHECKING:-})
   if [ "${CURRENT_IPV6}" = "${WAN_IPV6}" ] ; then
     echo "$(date "+[%Y-%m-%d %H:%M:%S]") [INFO] Current DNS AAAA record for ${RECORD} matches WAN IP (${CURRENT_IPV6}). Nothing to do."
     continue

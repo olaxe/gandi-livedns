@@ -1,10 +1,11 @@
+---
 name: "Build Images"
 
-on:
+'on':
   push:
     branches: master
   schedule:
-      - cron: '0 0 * * *' # Once per day at midnight
+      - cron: '0/15 * * * *' # Once per day at midnight
 
 jobs:
   build:

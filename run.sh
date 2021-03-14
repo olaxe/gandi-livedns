@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "${APIKEY}" || -z "${RECORD_LIST}" || -z "${DOMAIN}" ]; then
+if [ -z "${APIKEY}" ] || [ -z "${RECORD_LIST}" ] || [ -z "${DOMAIN}" ]; then
   echo "[ERROR] Mandatory variable APIKEY, DOMAIN or RECORD_LIST not defined."
   exit 1
 fi

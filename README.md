@@ -26,10 +26,10 @@ Optional variables :
 The easiest way to run gandi-livedns is simply to *docker run* it from a computer in your network, leaving it running in the background with all the default settings.
 ```sh
 docker run -d \
-	-e "APIKEY=<YOUR_VERY_SECRET_API_KEY>" \
-	-e "RECORD_LIST=blog;www;@" \
-	-e "DOMAIN=your-gandi-hosted-domain.com" \
-	olaxe/gandi-livedns
+        -e "APIKEY=<YOUR_VERY_SECRET_API_KEY>" \
+        -e "RECORD_LIST=blog;www;@" \
+        -e "DOMAIN=your-gandi-hosted-domain.com" \
+        olaxe/gandi-livedns
 ```
 This will update **blog.your-gandi-hosted-domain.com**, **www.your-gandi-hosted-domain.com**, and **your-gandi-hosted-domain.com** with your internet-facing IP (IPv4) every 10 minutes
 

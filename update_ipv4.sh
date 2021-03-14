@@ -8,7 +8,11 @@ set -f
 API="https://dns.api.gandi.net/api/v5/"
 IP_SERVICE="http://me.gandi.net"
 
-if [[ -z "${FORCE_IPV4}" ]]; then
+if [ ! -z "${DNS_SERVER_CHECKING}" ]; then
+  DNS_SERVER_CHECKING=@$DNS_SERVER_CHECKING
+fi
+
+if [ -z "${FORCE_IPV4}" ]; then
   WAN_IPV4=$(curl -s4 ${IP_SERVICE})
   if [[ -z "${WAN_IPV4}" ]]; then
     echo "$(date "+[%Y-%m-%d %H:%M:%S]") [ERROR] Something went wrong. Can not get your IPv4 from ${IP_SERVICE}"
@@ -25,7 +29,7 @@ for RECORD in ${RECORD_LIST//;/ } ; do
     SUBDOMAIN="${RECORD}.${DOMAIN}"
   fi
 
-  CURRENT_IPV4=$(dig A ${SUBDOMAIN} +short)
+  CURRENT_IPV4=$(dig A ${SUBDOMAIN} +short ${DNS_SERVER_CHECKING:-})
   if [ "${CURRENT_IPV4}" = "${WAN_IPV4}" ] ; then
     echo "$(date "+[%Y-%m-%d %H:%M:%S]") [INFO] Current DNS A record for ${RECORD} matches WAN IP (${CURRENT_IPV4}). Nothing to do."
     continue
